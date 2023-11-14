@@ -7,3 +7,5 @@ float Xpadle1 = 0;
 float Ypadle1 = 0;
 float Xpadle2 = 0;
 float Ypadle2 = 0;
+int count1 = 0;
+int count2 = 0;
