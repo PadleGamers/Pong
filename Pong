@@ -55,3 +55,30 @@ void draw() {
   float count2V = textWidth(count2str);
   text(count2str, 1000-(count2V+10), 60);
 }
+
+float x=50.0f;
+float speedx=2.5f; //Fart vandret 
+float speedy=2.5f; //Fart Lodret
+
+void draw() { //Tegner cirkel 
+  background(227);
+  circle(Xball, Yball, 50);
+  Xball=Xball+speedx; //Fart på cirklen
+  Yball=Yball+speedy;
+  //if(Xball > width || Xball < 0) { //Bounce på vandrette vægge 
+    //speedx=speedx*-1;
+    //speedy=speedy*-1;
+  //}
+  if(Yball > height || Yball < 0){ //Bounce på Lodrette vægge 
+    speedy=speedy*-1;
+  }
+  if ((Xball > width || Xball < 0)) { //resetter spillet og tegner en ny cirkle og starter spillet igen men det chrasher pt. idk why
+   draw();
+   {
+  background(227);
+  circle(Xball, Yball, 50);
+  Xball=Xball+speedx;
+  Yball=Yball+speedy;
+  
+  }
+  }
