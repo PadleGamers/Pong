@@ -20,10 +20,13 @@ void draw() {
 //Det her er padle 1
   if ((Xball-Rball)<=(Xpadle1+Lpadle) && Yball>=Ypadle1 && Yball<=(Ypadle1+Hpadle) && (Xball+Rball)>=Xpadle1){
   count1++;
+//Udskrivning af point kunne jo gøres fedt visuelt men jeg tænker det er nemmere efter vi har lavet resten af programmet
+  println(count1);
   }
 //Det her er padle 2
   if ((Xball+Rball)>=Xpadle2 && Yball>=Ypadle2 && Yball<=(Ypadle2+Hpadle) && (Xball-Rball)<=(Xpadle2+Lpadle)){
   count2++;
+  println(count2);
   }
 
 }
