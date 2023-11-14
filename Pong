@@ -1,5 +1,5 @@
 void setup() {
-  size(1000,800);
+  size(1000, 800);
 }
 
 float Xball = 0;
@@ -15,18 +15,38 @@ int count1 = 0;
 int count2 = 0;
 
 void draw() {
+  background(0);
 
-//Point System
-//Det her er padle 1
-  if ((Xball-Rball)<=(Xpadle1+Lpadle) && Yball>=Ypadle1 && Yball<=(Ypadle1+Hpadle) && (Xball+Rball)>=Xpadle1){
-  count1++;
-//Udskrivning af point kunne jo gøres fedt visuelt men jeg tænker det er nemmere efter vi har lavet resten af programmet
-  println(count1);
-  }
-//Det her er padle 2
-  if ((Xball+Rball)>=Xpadle2 && Yball>=Ypadle2 && Yball<=(Ypadle2+Hpadle) && (Xball-Rball)<=(Xpadle2+Lpadle)){
-  count2++;
-  println(count2);
+  //Bevægelige rektangler
+  rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
+  rect(Xpadle2, Ypadle2, Lpadle, Hpadle);
+
+  //tjekker om der er tastetryk
+  if (keyPressed) {
+    if (key == 'w' && Ypadle1 >= 70) {
+      Ypadle1-=7;
+    }
+    if (key == 's' && Ypadle1 <= 800-Hpadle) {
+      Ypadle1+=7;
+    }
+    if (keyCode == UP && Ypadle2 >= 70) {
+      Ypadle2-=7;
+    }
+    if (keyCode == DOWN && Ypadle2 <= 800-Hpadle) {
+      Ypadle2+=7;
+    }
   }
 
+  //Point System
+  //Det her er padle 1
+  if ((Xball-Rball)<=(Xpadle1+Lpadle) && Yball>=Ypadle1 && Yball<=(Ypadle1+Hpadle) && (Xball+Rball)>=Xpadle1) {
+    count1++;
+    //Udskrivning af point kunne jo gøres fedt visuelt men jeg tænker det er nemmere efter vi har lavet resten af programmet
+    println(count1);
+  }
+  //Det her er padle 2
+  if ((Xball+Rball)>=Xpadle2 && Yball>=Ypadle2 && Yball<=(Ypadle2+Hpadle) && (Xball-Rball)<=(Xpadle2+Lpadle)) {
+    count2++;
+    println(count2);
+  }
 }
