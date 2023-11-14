@@ -1,3 +1,7 @@
-//Hej
-//Hej
-//Hej
+float Xball = 0;
+float Yball = 0;
+float Rball = 0;
+float Xpadle = 0;
+float Ypadle = 0;
+float Lpadle = 0;
+float Hpadle = 0;
