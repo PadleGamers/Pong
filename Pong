@@ -18,18 +18,20 @@ void draw() {
   background(0);
 
   //Bevægelige rektangler
+  fill(255);
   rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
   rect(Xpadle2, Ypadle2, Lpadle, Hpadle);
+  rect(500-5, 60, 10, 800-60);
 
   //tjekker om der er tastetryk
   if (keyPressed) {
-    if (key == 'w' && Ypadle1 >= 70) {
+    if (key == 'w' && Ypadle1 >= 80) {
       Ypadle1-=7;
     }
     if (key == 's' && Ypadle1 <= 800-Hpadle) {
       Ypadle1+=7;
     }
-    if (keyCode == UP && Ypadle2 >= 70) {
+    if (keyCode == UP && Ypadle2 >= 80) {
       Ypadle2-=7;
     }
     if (keyCode == DOWN && Ypadle2 <= 800-Hpadle) {
@@ -41,12 +43,15 @@ void draw() {
   //Det her er padle 1
   if ((Xball-Rball)<=(Xpadle1+Lpadle) && Yball>=Ypadle1 && Yball<=(Ypadle1+Hpadle) && (Xball+Rball)>=Xpadle1) {
     count1++;
-    //Udskrivning af point kunne jo gøres fedt visuelt men jeg tænker det er nemmere efter vi har lavet resten af programmet
-    println(count1);
   }
+  textSize(60);
+  String count1str = nf(count1);
+  text(count1str, 10, 60);
   //Det her er padle 2
   if ((Xball+Rball)>=Xpadle2 && Yball>=Ypadle2 && Yball<=(Ypadle2+Hpadle) && (Xball-Rball)<=(Xpadle2+Lpadle)) {
     count2++;
-    println(count2);
   }
+  String count2str = nf(count2);
+  float count2V = textWidth(count2str);
+  text(count2str, 1000-(count2V+10), 60);
 }
