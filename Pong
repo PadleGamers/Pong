@@ -2,8 +2,8 @@ void setup() {
   size(1000, 800);
 }
 
-float Xball = 0;
-float Yball = 0;
+float Xball = 500;
+float Yball = 400;
 float Rball = 12.5;
 float Lpadle = 20;
 float Hpadle = 200;
@@ -69,16 +69,14 @@ void draw() { //Tegner cirkel
     //speedx=speedx*-1;
     //speedy=speedy*-1;
   //}
-  if(Yball > height || Yball < 0){ //Bounce på Lodrette vægge 
-    speedy=speedy*-1;
   }
-  if ((Xball > width || Xball < 0)) { //resetter spillet og tegner en ny cirkle og starter spillet igen men det chrasher pt. idk why
-   draw();
-   {
-  background(227);
-  circle(Xball, Yball, 50);
-  Xball=Xball+speedx;
-  Yball=Yball+speedy;
-  
+  if(Xball >width-25|| Xball < 0+25){ //skifter retning lodret og nustiller position på cirklen
+  reset();
+  speedx=speedx*-1;
   }
+}
+  void reset() {
+    Xball = 400;
+    Yball = 500;
   }
+
