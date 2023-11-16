@@ -2,81 +2,109 @@ void setup() {
   size(1000, 800);
 }
 
-float Xball = 500;
-float Yball = 400;
-float Rball = 12.5;
-float Lpadle = 20;
-float Hpadle = 200;
-float Xpadle1 = 30;
-float Ypadle1 = 800/2-Hpadle/2;
-float Xpadle2 = 1000-Lpadle-30;
-float Ypadle2 = 800/2-Hpadle/2;
-int count1 = 0;
-int count2 = 0;
+float Xball = 500;                      //X-værdi af bold
+float Yball = 400;                      //Y-værdi af bold
+float Rball = 12.5;                     //Radius af bold
+float Lpadle = 20;                      //Længden af 'Padles'
+float Hpadle = 200;                     //Højden af 'Padles'
+float Xpadle1 = 30;                     //X-værdi af Padle til venstre
+float Ypadle1 = 800/2-Hpadle/2;         //Y-værdi af Padle til venstre
+float Xpadle2 = 1000-Lpadle-30;         //X-værdi af Padle til højre
+float Ypadle2 = 800/2-Hpadle/2;         //Y-værdi af Padle til højre
+int count1 = 0;                         //Point-tæller af Padle til venstre
+int count2 = 0;                         //Point-tæller af Padle til højre
+boolean start = false;                  //Boolean der fortæller om spillet er startet
+float x=50.0f;
+float speedx= 2.5f;                     //Fart vandret
+float speedy= 2.5f;                     //Fart Lodret
+boolean delay = false;                  //Boolean der fortæller om der har været et delay
+int delayCount = 0;                     //Tæller
 
 void draw() {
   background(0);
+  noStroke();
 
-  //Bevægelige rektangler
-  fill(255);
-  rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
-  rect(Xpadle2, Ypadle2, Lpadle, Hpadle);
-  rect(500-5, 60, 10, 800-60);
+  if (start == false) {
+    String name = "Pong";
+    String directions = "Tryk på ENTER for at starte";
 
-  //tjekker om der er tastetryk
-  if (keyPressed) {
-    if (key == 'w' && Ypadle1 >= 80) {
-      Ypadle1-=7;
-    }
-    if (key == 's' && Ypadle1 <= 800-Hpadle) {
-      Ypadle1+=7;
-    }
-    if (keyCode == UP && Ypadle2 >= 80) {
-      Ypadle2-=7;
-    }
-    if (keyCode == DOWN && Ypadle2 <= 800-Hpadle) {
-      Ypadle2+=7;
-    }
+    textSize(200);
+    float nameSize = textWidth(name);
+    text(name, 1000/2-nameSize/2, 800/2);
+
+    textSize(60);
+    float directionsSize = textWidth(directions);
+    text(directions, 1000/2-directionsSize/2, 800/2+800/4);
   }
 
-  //Point System
-  //Det her er padle 1
-  if ((Xball-Rball)<=(Xpadle1+Lpadle) && Yball>=Ypadle1 && Yball<=(Ypadle1+Hpadle) && (Xball+Rball)>=Xpadle1) {
-    count1++;
+  if (start == true) {
+    //Bevægelige rektangler
+    fill(255);
+    rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
+    rect(Xpadle2, Ypadle2, Lpadle, Hpadle);
+    rect(500-5, 60, 10, 800-60);
+
+    //tjekker om der er tastetryk
+    if (keyPressed) {
+      if (key == 'w' && Ypadle1 >= 80) {
+        Ypadle1-=7;
+      }
+      if (key == 's' && Ypadle1 <= 800-Hpadle) {
+        Ypadle1+=7;
+      }
+      if (keyCode == UP && Ypadle2 >= 80) {
+        Ypadle2-=7;
+      }
+      if (keyCode == DOWN && Ypadle2 <= 800-Hpadle) {
+        Ypadle2+=7;
+      }
+    }
+
+    //Point System
+    //Det her er padle 1
+    if ((Xball-Rball)<=(Xpadle1+Lpadle) && Yball>=Ypadle1 && Yball<=(Ypadle1+Hpadle) && (Xball+Rball)>=Xpadle1) {
+      count1++;
+      speedx*=-1;
+    }
+    textSize(60);
+    String count1str = nf(count1);
+    text(count1str, 10, 60);
+
+    //Det her er padle 2
+    if ((Xball+Rball)>=Xpadle2 && Yball>=Ypadle2 && Yball<=(Ypadle2+Hpadle) && (Xball-Rball)<=(Xpadle2+Lpadle)) {
+      count2++;
+      speedx*=-1;
+    }
+    String count2str = nf(count2);
+    float count2V = textWidth(count2str);
+    text(count2str, 1000-(count2V+10), 60);
+
+    if (delayCount == 60) {
+      delay = true;
+      circle(Xball, Yball, 50);
+      Xball=Xball+speedx; //Fart på cirklen
+      Yball=Yball+speedy;
+      if (Xball >width-25|| Xball < 0+25) { //skifter retning lodret og nustiller position på cirklen
+        reset();
+        speedx=speedx*-1;
+      }
+    }
+    
+    if (delay == false){
+      delayCount++;
+    }
   }
-  textSize(60);
-  String count1str = nf(count1);
-  text(count1str, 10, 60);
-  //Det her er padle 2
-  if ((Xball+Rball)>=Xpadle2 && Yball>=Ypadle2 && Yball<=(Ypadle2+Hpadle) && (Xball-Rball)<=(Xpadle2+Lpadle)) {
-    count2++;
-  }
-  String count2str = nf(count2);
-  float count2V = textWidth(count2str);
-  text(count2str, 1000-(count2V+10), 60);
 }
 
-float x=50.0f;
-float speedx=2.5f; //Fart vandret 
-float speedy=2.5f; //Fart Lodret
-
-void draw() { //Tegner cirkel 
-  background(227);
-  circle(Xball, Yball, 50);
-  Xball=Xball+speedx; //Fart på cirklen
-  Yball=Yball+speedy;
-  //if(Xball > width || Xball < 0) { //Bounce på vandrette vægge 
-    //speedx=speedx*-1;
-    //speedy=speedy*-1;
-  //}
-  }
-  if(Xball >width-25|| Xball < 0+25){ //skifter retning lodret og nustiller position på cirklen
-  reset();
-  speedx=speedx*-1;
+void keyPressed() {
+  if (key == ENTER && start == false) {
+    start = true;
   }
 }
-  void reset() {
-    Xball = 400;
-    Yball = 500;
-  }
 
+void reset() {
+  Xball = 500;
+  Yball = 400;
+  delayCount = 0;
+  delay = false;
+}
