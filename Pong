@@ -3,8 +3,8 @@ void setup() {
 }
 
 float Xball = 500;                      //X-værdi af bold
-float Yball = 400;                      //Y-værdi af bold
-float Rball = 12.5;                     //Radius af bold
+float Yball = 430;                      //Y-værdi af bold
+float Rball = 15;                     //Radius af bold
 float Lpadle = 20;                      //Længden af 'Padles'
 float Hpadle = 200;                     //Højden af 'Padles'
 float Xpadle1 = 30;                     //X-værdi af Padle til venstre
@@ -42,7 +42,7 @@ void draw() {
     fill(255);
     rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
     rect(Xpadle2, Ypadle2, Lpadle, Hpadle);
-    rect(500-5, 60, 10, 800-60);
+    rect(500-5, 60, 10, 800-60); //midterlinje
 
     //tjekker om der er tastetryk
     if (keyPressed) {
@@ -81,12 +81,15 @@ void draw() {
 
     if (delayCount == 60) {
       delay = true;
-      circle(Xball, Yball, 50);
+      circle(Xball, Yball, Rball*2);
       Xball=Xball+speedx; //Fart på cirklen
       Yball=Yball+speedy;
-      if (Xball >width-25|| Xball < 0+25) { //skifter retning lodret og nustiller position på cirklen
+      if (Xball >width-Rball || Xball < 0+Rball) { //skifter retning lodret og nustiller position på cirklen
         reset();
         speedx=speedx*-1;
+      }
+      if ((Yball+Rball) >= 800 || (Yball-Rball) <= 60) {
+        speedy*=-1;
       }
     }
     
@@ -104,7 +107,7 @@ void keyPressed() {
 
 void reset() {
   Xball = 500;
-  Yball = 400;
+  Yball = 430;
   delayCount = 0;
   delay = false;
 }
