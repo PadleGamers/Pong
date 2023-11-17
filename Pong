@@ -1,5 +1,11 @@
+import processing.net.*;
+
+Client myClient;
+String dataIn = "";
+
 void setup() {
   size(1000, 800);
+  myClient = new Client(this, "192.168.0.125", 5204);
 }
 
 float Xball = 500;                      //X-værdi af bold
@@ -23,6 +29,12 @@ int delayCount = 0;                     //Tæller
 void draw() {
   background(0);
   noStroke();
+  while (myClient.available() > 0) {
+    dataIn = myClient.readString();
+    println("Recieved: " + dataIn);
+    sendDataToServer("New data from client");
+  }
+  
 
   if (start == false) {
     String name = "Pong";
@@ -51,18 +63,13 @@ void draw() {
   if (start == true) {
     //Bevægelige rektangler
     fill(255);
+    Ypadle1 = float(dataIn);
     rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
     rect(Xpadle2, Ypadle2, Lpadle, Hpadle);
     rect(500-5, 60, 10, 800-60); //midterlinje
 
     //tjekker om der er tastetryk
     if (keyPressed) {
-      if (key == 'w' && Ypadle1 >= 80) {
-        Ypadle1-=7;
-      }
-      if (key == 's' && Ypadle1 <= 800-Hpadle) {
-        Ypadle1+=7;
-      }
       if (keyCode == UP && Ypadle2 >= 80) {
         Ypadle2-=7;
       }
@@ -139,4 +146,8 @@ void reset() {
   } else {
     speedx*=1;
   }
+}
+
+void sendDataToServer(String data) {
+  myClient.write(data);
 }
