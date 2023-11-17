@@ -1,3 +1,4 @@
+//dele af client-delen er taget fra chatgpt
 import processing.net.*;
 
 Client myClient;
