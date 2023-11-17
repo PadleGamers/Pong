@@ -6,17 +6,23 @@ Server myServer;
 void setup() {
   size(1000, 800);
   myServer = new Server(this, 5204, "192.168.0.125"); 
+  frameRate(100);
 }
 
 float Hpadle = 150;                     //Højden af 'Padles'
 int Ypadle1 = 400-75;         //Y-værdi af Padle til venstre
-
+String dataIn = "";
+String whatClientSaid = "";
 
 void draw() {
   background(0);
   noStroke();
+  Client thisClient = myServer.available();
+  if (thisClient != null) {
+    whatClientSaid = thisClient.readString();
+  }
   
-    if (keyPressed) {
+    if (keyPressed && whatClientSaid == null) {
       if (key == 'w' && Ypadle1 >= 80) {
         Ypadle1+=-7;
         myServer.write(String.valueOf(Ypadle1));
@@ -25,6 +31,10 @@ void draw() {
         Ypadle1+=7;
         myServer.write(String.valueOf(Ypadle1));
       }
+    }
+    
+    if (whatClientSaid != null) {
+      whatClientSaid = null;
     }
     
     println(Ypadle1);
