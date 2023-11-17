@@ -1,0 +1,32 @@
+//dele af taget fra Chatgpt
+import processing.net.*;
+
+Server myServer;
+
+void setup() {
+  size(1000, 800);
+  myServer = new Server(this, 5204, "192.168.0.125"); 
+}
+
+float Hpadle = 150;                     //Højden af 'Padles'
+int Ypadle1 = 400-75;         //Y-værdi af Padle til venstre
+
+
+void draw() {
+  background(0);
+  noStroke();
+  
+    if (keyPressed) {
+      if (key == 'w' && Ypadle1 >= 80) {
+        Ypadle1+=-7;
+        myServer.write(String.valueOf(Ypadle1));
+      }
+      if (key == 's' && Ypadle1 <= 800-Hpadle) {
+        Ypadle1+=7;
+        myServer.write(String.valueOf(Ypadle1));
+      }
+    }
+    
+    println(Ypadle1);
+    println(String.valueOf(Ypadle1));
+}
