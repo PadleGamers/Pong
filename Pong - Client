@@ -7,6 +7,7 @@ String dataIn = "";
 void setup() {
   size(1000, 800);
   myClient = new Client(this, "192.168.0.125", 5204);
+  frameRate(100);
 }
 
 float Xball = 500;                      //X-værdi af bold
@@ -22,8 +23,8 @@ int count1 = 0;                         //Point-tæller af Padle til venstre
 int count2 = 0;                         //Point-tæller af Padle til højre
 boolean start = false;                  //Boolean der fortæller om spillet er startet
 float x=50.0f;
-float speedx= 4f;                       //Fart vandret
-float speedy= 3.7f;                     //Fart Lodret
+float speedx= 2.5f;                       //Fart vandret
+float speedy= 1.5f;                     //Fart Lodret
 boolean delay = false;                  //Boolean der fortæller om der har været et delay
 int delayCount = 0;                     //Tæller
 
@@ -32,7 +33,7 @@ void draw() {
   noStroke();
   while (myClient.available() > 0) {
     dataIn = myClient.readString();
-    println("Recieved: " + dataIn);
+    println("Recieved: " + dataIn + "  Available: " + myClient.available());
     sendDataToServer("New data from client");
   }
   
@@ -72,10 +73,10 @@ void draw() {
     //tjekker om der er tastetryk
     if (keyPressed) {
       if (keyCode == UP && Ypadle2 >= 80) {
-        Ypadle2-=7;
+        Ypadle2-=3.75;
       }
       if (keyCode == DOWN && Ypadle2 <= 800-Hpadle) {
-        Ypadle2+=7;
+        Ypadle2+=3.75;
       }
     }
 
