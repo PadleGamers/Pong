@@ -24,8 +24,8 @@ int count1 = 0;                         //Point-tæller af Padle til venstre
 int count2 = 0;                         //Point-tæller af Padle til højre
 boolean start = false;                  //Boolean der fortæller om spillet er startet
 float x=50.0f;
-float speedx= 2.5f;                       //Fart vandret
-float speedy= 1.5f;                     //Fart Lodret
+float speedx= 1.5f;                       //Fart vandret
+float speedy= 0.7f;                     //Fart Lodret
 boolean delay = false;                  //Boolean der fortæller om der har været et delay
 int delayCount = 0;                     //Tæller
 
@@ -133,8 +133,8 @@ void keyPressed() {
 }
 
 void reset() {
-  speedx= 4f;
-  speedy= 4f;
+  speedx= 1.5f;
+  speedy= 0.7f;
   Xball = 500;
   Yball = 430;
   delayCount = 0;
