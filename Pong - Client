@@ -124,6 +124,7 @@ void draw() {
       delayCount++;
     }
   }
+  println("3D3D");
 }
 
 void keyPressed() {
