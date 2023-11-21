@@ -155,4 +155,3 @@ void reset() {
 void sendDataToServer(String data) { 
   myClient.write(data);
 }
-//hmmmm
