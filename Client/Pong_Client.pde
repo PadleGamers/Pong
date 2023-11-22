@@ -45,7 +45,7 @@ void draw() {
     } else if (dataIn.equals("begin")) {
       start = true;
     }
-    println("Recieved: " + dataIn + "  Available: " + myClient.available()+"  Number: "+number+ " Ypadle: "+Ypadle1);
+    println("Recieved: " + dataIn + "  Available: " + myClient.available()+"  Number: "+number+ " Ypadle: "+Ypadle1+"  X-værdi: "+Xball+"  Y-værdi: "+Yball);
     String check = dataIn.substring(0,2);
     int spacex = 0;
     int spacey = 0;
@@ -65,7 +65,7 @@ void draw() {
       }
       Ypadle1=float(dataIn.substring(2,spacex));
       Xball=float(dataIn.substring(spacex+1,spacey));
-      Yball=float(dataIn.substring(spacey+1,dataIn.length()));
+      Yball=float(dataIn.substring(spacey+1,dataIn.length()-1));
       sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)); //ChatGpt
       }
   }
