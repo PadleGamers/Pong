@@ -96,6 +96,8 @@ void draw() {
   }
 
   if (start == true) {
+    circle(Xball, Yball, Rball*2);
+    
     //Bevægelige rektangler
     fill(255);
     rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
