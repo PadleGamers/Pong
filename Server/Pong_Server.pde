@@ -21,6 +21,8 @@ float Xpadle2 = 1000-Lpadle-30;         //X-værdi af Padle til højre
 float speedx= 2f;                       //Fart vandret
 float speedy= 1f;                       //Fart Lodret
 boolean delay = false;                  //Boolean der fortæller om der har været et delay
+boolean startdelay = false;
+int startdelayCount = 0;
 int delayCount = 0;                     //Tæller
 int count1 = 0;                         //Point-tæller af Padle til venstre
 int count2 = 0;                         //Point-tæller af Padle til højre
@@ -49,7 +51,6 @@ void draw() {
       if (whatClientSaid.equals("start")) {
         myServer.write("begin");
         start = true;
-        myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball));
       } else if (whatClientSaid.charAt(0) == 'n') {
         if (whatClientSaid.charAt(1) == '1') {
           Ypadle1=float(whatClientSaid.substring(2, whatClientSaid.length()));
@@ -111,6 +112,15 @@ void draw() {
       speedx*=1;
     }
   }
+  
+  if (startdelayCount == 120){
+      myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball));
+      startdelay = true;
+    }
+    
+    if (startdelay == false && number == 2) {
+      startdelayCount++;
+    }
 }
 
 void serverEvent(Server someServer, Client someClient) {
