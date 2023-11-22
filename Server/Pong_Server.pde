@@ -77,7 +77,6 @@ void draw() {
     
     if (delayCount == 120) {
       delay = true;
-      circle(Xball, Yball, Rball*2);
       Xball=Xball+speedx; //Fart på cirklen
       Yball=Yball+speedy;
       if (Xball >width-Rball) { //skifter retning lodret og nustiller position på cirklen
@@ -118,4 +117,23 @@ void serverEvent(Server someServer, Client someClient) {
   myServer.write("Number"+String.valueOf(number));
   println("Number"+String.valueOf(number));
   number++;
+}
+
+void reset() {
+  speedx= 2f;
+  speedy= 1f;
+  Xball = 500;
+  Yball = 430;
+  delayCount = 0;
+  delay = false;
+  if (random(100) > 50) {
+    speedx*=-1;
+  } else {
+    speedx*=1;
+  }
+  if (random(100) > 50) {
+    speedy*=-1;
+  } else {
+    speedx*=1;
+  }
 }
