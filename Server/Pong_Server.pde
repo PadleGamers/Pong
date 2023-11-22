@@ -49,6 +49,7 @@ void draw() {
       if (whatClientSaid.equals("start")) {
         myServer.write("begin");
         start = true;
+        myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball));
       } else if (whatClientSaid.charAt(0) == 'n') {
         if (whatClientSaid.charAt(1) == '1') {
           Ypadle1=float(whatClientSaid.substring(2, whatClientSaid.length()));
