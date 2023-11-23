@@ -6,7 +6,7 @@ Server myServer;
 
 void setup() {
   size(1000, 800);
-  myServer = new Server(this, 5204, "192.168.10.11");
+  myServer = new Server(this, 5204, "192.168.10.18");
   frameRate(100);
 }
 
@@ -16,7 +16,7 @@ float Rball = 15;                       //Radius af bold
 float Lpadle = 15;                      //Længden af 'Padles'
 float Hpadle = 150;                     //Højden af 'Padles'
 float Xpadle1 = 30;                     //X-værdi af Padle til venstre
-float Ypadle1 = 400-75;         //Y-værdi af Padle til venstre
+float Ypadle1 = 400-75;                 //Y-værdi af Padle til venstre
 float Xpadle2 = 1000-Lpadle-30;         //X-værdi af Padle til højre
 float speedx= 2f;                       //Fart vandret
 float speedy= 1f;                       //Fart Lodret
@@ -47,17 +47,25 @@ void draw() {
 
   //ChatGpt
   if (whatClientSaid != null) {
+    println(whatClientSaid);
     if (whatClientSaid.length()>=5) {
       if (whatClientSaid.equals("start")) {
         myServer.write("begin");
         start = true;
       } else if (whatClientSaid.charAt(0) == 'n') {
+        int end = 0;
+        for (int i=0; true; i++){
+          if (whatClientSaid.charAt(i)=='e') {
+            end = 1;
+            break;
+          }
+        }
         if (whatClientSaid.charAt(1) == '1') {
-          Ypadle1=float(whatClientSaid.substring(2, whatClientSaid.length()));
-          myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball));
-        } else {
-          Ypadle2=float(whatClientSaid.substring(2, whatClientSaid.length()));
-          myServer.write("n1"+String.valueOf(Ypadle1)+"x"+String.valueOf(Xball)+"y"+String.valueOf(Yball));
+          Ypadle1=float(whatClientSaid.substring(2, end));
+          myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball)+"e");
+        } else if (whatClientSaid.charAt(1) == '2'){
+          Ypadle2=float(whatClientSaid.substring(2, end));
+          myServer.write("n1"+String.valueOf(Ypadle2)+"x"+String.valueOf(Xball)+"y"+String.valueOf(Yball)+"e");
         }
       }
     }
@@ -99,7 +107,16 @@ void draw() {
     if (delay == false) {
       delayCount++;
     }
+    println(Xball+"  "+Yball);
     
+    if (startdelayCount == 100){
+      myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball)+"e");
+      startdelay = true;
+    }
+    
+    if (startdelay == false && number == 3) {
+      startdelayCount++;
+    }
   } else {
     if (random(100) > 50) {
       speedx*=-1;
@@ -113,14 +130,6 @@ void draw() {
     }
   }
   
-  if (startdelayCount == 120){
-      myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball));
-      startdelay = true;
-    }
-    
-    if (startdelay == false && number == 2) {
-      startdelayCount++;
-    }
 }
 
 void serverEvent(Server someServer, Client someClient) {

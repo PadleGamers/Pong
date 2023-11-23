@@ -41,7 +41,7 @@ void draw() {
     }
     if (numdataIn.equals("Number") && number == 0) {
       number = int(dataIn.substring(6, 7));
-      sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2));
+      sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)+"e");
     } else if (dataIn.equals("begin")) {
       start = true;
     }
@@ -137,7 +137,6 @@ void draw() {
 
 void keyPressed() {
   if (key == ENTER && start == false) {
-    start = true;
     sendDataToServer("start");
   }
 }
