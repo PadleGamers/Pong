@@ -73,7 +73,7 @@ void draw() {
       Ypadle1=float(dataIn.substring(2,spacex));
       Xball=float(dataIn.substring(spacex+1,spacey));
       Yball=float(dataIn.substring(spacey+1,spacep));
-      sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)); //ChatGpt
+      sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)+"e"); //ChatGpt
       }
   }
 

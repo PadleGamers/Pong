@@ -56,16 +56,16 @@ void draw() {
         int end = 0;
         for (int i=0; true; i++){
           if (whatClientSaid.charAt(i)=='e') {
-            end = 1;
+            end = i;
             break;
           }
         }
         if (whatClientSaid.charAt(1) == '1') {
           Ypadle1=float(whatClientSaid.substring(2, end));
-          myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball)+"e");
+          myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(Xball)+"y"+String.valueOf(Yball)+"e");
         } else if (whatClientSaid.charAt(1) == '2'){
           Ypadle2=float(whatClientSaid.substring(2, end));
-          myServer.write("n1"+String.valueOf(Ypadle2)+"x"+String.valueOf(Xball)+"y"+String.valueOf(Yball)+"e");
+          myServer.write("n1"+String.valueOf(Ypadle2)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball)+"e");
         }
       }
     }
