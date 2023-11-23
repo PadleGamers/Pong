@@ -1,11 +1,13 @@
 //Dele er taget fra ChatGpt
 
+// først åbnes serveren, derefter åbnes client nr. 1, og sidst client nr. 2
+
 import processing.net.*;
 
 Server myServer;
 
 void setup() {
-  size(1000, 800);
+  size(0, 0);
   myServer = new Server(this, 5204, "192.168.10.18");
   frameRate(100);
 }
@@ -36,8 +38,6 @@ String whatClientSaid = "";
 int number = 1;
 
 void draw() {
-  background(0);
-  noStroke();
   Client thisClient = myServer.available();  //ChatGpt
   if (thisClient != null) {   //ChatGpt
     whatClientSaid = thisClient.readString();   //ChatGpt
