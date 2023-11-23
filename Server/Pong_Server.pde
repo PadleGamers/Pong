@@ -62,7 +62,7 @@ void draw() {
         }
         if (whatClientSaid.charAt(1) == '1') {
           Ypadle1=float(whatClientSaid.substring(2, end));
-          myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(Xball)+"y"+String.valueOf(Yball)+"e");
+          myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball)+"e");
         } else if (whatClientSaid.charAt(1) == '2'){
           Ypadle2=float(whatClientSaid.substring(2, end));
           myServer.write("n1"+String.valueOf(Ypadle2)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball)+"e");
@@ -85,7 +85,7 @@ void draw() {
       speedy*=1.02;
     }
     
-    if (delayCount == 120) {
+    if (delayCount == 240) {
       delay = true;
       Xball=Xball+speedx; //Fart på cirklen
       Yball=Yball+speedy;

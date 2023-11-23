@@ -129,7 +129,6 @@ void draw() {
       }
     }
 
-
     textSize(60);
     String count1str = nf(count1);
     text(count1str, 10, 60);
@@ -138,6 +137,19 @@ void draw() {
     String count2str = nf(count2);
     float count2V = textWidth(count2str);
     text(count2str, 1000-(count2V+10), 60);
+
+    if (delay == false) {
+      triangle(Xpadle2+(Lpadle/2), Ypadle2+Hpadle+10, Xpadle2-10, Ypadle2+Hpadle+30, Xpadle2+Lpadle+10, Ypadle2+Hpadle+30);
+      textSize(40);
+      String name = "You";
+      float nameWidth = textWidth(name);
+      text(name, Xpadle2+(Lpadle/2)-(nameWidth/2), Ypadle2+Hpadle+70);
+      delayCount++;
+    }
+
+    if (delayCount > 240) {
+      delay = true;
+    }
   }
 }
 
