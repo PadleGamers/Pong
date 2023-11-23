@@ -71,7 +71,11 @@ void draw() {
         }
       }
       Ypadle1=float(dataIn.substring(2,spacex));
+      if (number == 1) {
       Xball=float(dataIn.substring(spacex+1,spacey));
+      } else if (number == 2){
+        Xball=(1000+float(dataIn.substring(spacex+1,spacey))*(-1));
+      }
       Yball=float(dataIn.substring(spacey+1,spacep));
       sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)+"e"); //ChatGpt
       }
