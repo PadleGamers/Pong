@@ -51,36 +51,37 @@ void draw() {
     int spacey = 0;
     int spacep = 0;
 
-    for (int i=0; true; i++) {
-      if (dataIn.charAt(i)=='x') {
-        spacex = i;
-        break;
+    if (check.equals("n1") || check.equals("n2")) {
+      for (int i=0; true; i++) {
+        if (dataIn.charAt(i)=='x') {
+          spacex = i;
+          break;
+        }
       }
-    }
-    for (int i=0; true; i++) {
-      if (dataIn.charAt(i) == 'y') {
-        spacey = i;
-        break;
+      for (int i=0; true; i++) {
+        if (dataIn.charAt(i) == 'y') {
+          spacey = i;
+          break;
+        }
       }
-    }
-    for (int i=0; true; i++) {
-      if (dataIn.charAt(i) =='e') {
-        spacep = i;
-        break;
+      for (int i=0; true; i++) {
+        if (dataIn.charAt(i) =='e') {
+          spacep = i;
+          break;
+        }
       }
+      if (number == 1) {
+        Xball=float(dataIn.substring(spacex+1, spacey));
+      } else if (number == 2) {
+        Xball=(1000+float(dataIn.substring(spacex+1, spacey))*(-1));
+      }
+      Yball=float(dataIn.substring(spacey+1, spacep));
     }
-    if (number == 1) {
-      Xball=float(dataIn.substring(spacex+1, spacey));
-    } else if (number == 2) {
-      Xball=(1000+float(dataIn.substring(spacex+1, spacey))*(-1));
-    }
-    Yball=float(dataIn.substring(spacey+1, spacep));
-    sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)+"e"); //ChatGpt
 
     if (check.equals("n"+String.valueOf(number))) {
       println("Recieved");
-
       Ypadle1=float(dataIn.substring(2, spacex));
+      sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)+"e"); //ChatGpt
     }
   }
 
