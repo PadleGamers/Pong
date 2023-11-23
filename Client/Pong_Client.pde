@@ -63,9 +63,15 @@ void draw() {
           break;
         }
       }
+      for (int i=0; true; i++){
+        if (dataIn.charAt(i) =='e') {
+          spacep = i;
+          break;
+        }
+      }
       Ypadle1=float(dataIn.substring(2,spacex));
       Xball=float(dataIn.substring(spacex+1,spacey));
-      Yball=float(dataIn.substring(spacey+1,dataIn.length()-1));
+      Yball=float(dataIn.substring(spacey+1,spacep));
       sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)); //ChatGpt
       }
   }
