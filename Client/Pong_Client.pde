@@ -46,39 +46,42 @@ void draw() {
       start = true;
     }
     println("Recieved: " + dataIn + "  Available: " + myClient.available()+"  Number: "+number+ " Ypadle: "+Ypadle1+"  X-værdi: "+Xball+"  Y-værdi: "+Yball);
-    String check = dataIn.substring(0,2);
+    String check = dataIn.substring(0, 2);
     int spacex = 0;
     int spacey = 0;
     int spacep = 0;
-    if (check.equals("n"+String.valueOf(number))){
+
+    for (int i=0; true; i++) {
+      if (dataIn.charAt(i)=='x') {
+        spacex = i;
+        break;
+      }
+    }
+    for (int i=0; true; i++) {
+      if (dataIn.charAt(i) == 'y') {
+        spacey = i;
+        break;
+      }
+    }
+    for (int i=0; true; i++) {
+      if (dataIn.charAt(i) =='e') {
+        spacep = i;
+        break;
+      }
+    }
+    if (number == 1) {
+      Xball=float(dataIn.substring(spacex+1, spacey));
+    } else if (number == 2) {
+      Xball=(1000+float(dataIn.substring(spacex+1, spacey))*(-1));
+    }
+    Yball=float(dataIn.substring(spacey+1, spacep));
+    sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)+"e"); //ChatGpt
+
+    if (check.equals("n"+String.valueOf(number))) {
       println("Recieved");
-      for (int i=0; true; i++){
-        if (dataIn.charAt(i)=='x') {
-          spacex = i;
-          break;
-        }
-      }
-      for (int i=0; true; i++){
-        if (dataIn.charAt(i) == 'y') {
-          spacey = i;
-          break;
-        }
-      }
-      for (int i=0; true; i++){
-        if (dataIn.charAt(i) =='e') {
-          spacep = i;
-          break;
-        }
-      }
-      Ypadle1=float(dataIn.substring(2,spacex));
-      if (number == 1) {
-      Xball=float(dataIn.substring(spacex+1,spacey));
-      } else if (number == 2){
-        Xball=(1000+float(dataIn.substring(spacex+1,spacey))*(-1));
-      }
-      Yball=float(dataIn.substring(spacey+1,spacep));
-      sendDataToServer("n"+String.valueOf(number)+String.valueOf(Ypadle2)+"e"); //ChatGpt
-      }
+
+      Ypadle1=float(dataIn.substring(2, spacex));
+    }
   }
 
 
@@ -108,7 +111,7 @@ void draw() {
 
   if (start == true) {
     circle(Xball, Yball, Rball*2);
-    
+
     //Bevægelige rektangler
     fill(255);
     rect(Xpadle1, Ypadle1, Lpadle, Hpadle);
@@ -125,17 +128,15 @@ void draw() {
       }
     }
 
-    
+
     textSize(60);
     String count1str = nf(count1);
     text(count1str, 10, 60);
 
-    
+
     String count2str = nf(count2);
     float count2V = textWidth(count2str);
     text(count2str, 1000-(count2V+10), 60);
-
-    
   }
 }
 
