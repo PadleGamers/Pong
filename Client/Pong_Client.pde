@@ -7,7 +7,7 @@ String dataIn = "";
 
 void setup() {
   size(1000, 800);
-  myClient = new Client(this, "192.168.10.11", 5204);
+  myClient = new Client(this, "192.168.10.18", 5204);
   frameRate(100);
 }
 
@@ -51,6 +51,7 @@ void draw() {
     int spacey = 0;
     int spacep = 0;
     if (check.equals("n"+String.valueOf(number))){
+      println("Recieved");
       for (int i=0; true; i++){
         if (dataIn.charAt(i)=='x') {
           spacex = i;
