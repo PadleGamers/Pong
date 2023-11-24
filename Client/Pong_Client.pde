@@ -71,8 +71,18 @@ void draw() {
         }
       }
       if (number == 1) {
+        if (float(dataIn.substring(spacex+1, spacey))== 500 && Xball < 500) {
+          count2++;
+        } else if (float(dataIn.substring(spacex+1, spacey))== 500 && Xball > 500){
+          count1++;
+        }
         Xball=float(dataIn.substring(spacex+1, spacey));
       } else if (number == 2) {
+        if (1000+float(dataIn.substring(spacex+1, spacey))*(-1)== 500 && Xball < 500) {
+          count2++;
+        } else if (1000+float(dataIn.substring(spacex+1, spacey))*(-1)== 500 && Xball > 500){
+          count1++;
+        }
         Xball=(1000+float(dataIn.substring(spacex+1, spacey))*(-1));
       }
       Yball=float(dataIn.substring(spacey+1, spacep));

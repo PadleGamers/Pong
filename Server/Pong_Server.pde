@@ -89,7 +89,7 @@ void draw() {
       delay = true;
       Xball=Xball+speedx; //Fart på cirklen
       Yball=Yball+speedy;
-      if (Xball >width-Rball) { //skifter retning lodret og nustiller position på cirklen
+      if (Xball >1000-Rball) { //skifter retning lodret og nustiller position på cirklen
         reset();
         speedx=speedx*-1;
         count1++;
@@ -109,7 +109,7 @@ void draw() {
     }
     println(Xball+"  "+Yball);
     
-    if (startdelayCount == 100){
+    if (startdelayCount == 100 && startdelay == false){
       myServer.write("n2"+String.valueOf(Ypadle1)+"x"+String.valueOf(1000-Xball)+"y"+String.valueOf(Yball)+"e");
       startdelay = true;
     }
@@ -129,7 +129,6 @@ void draw() {
       speedx*=1;
     }
   }
-  
 }
 
 void serverEvent(Server someServer, Client someClient) {
