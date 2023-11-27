@@ -8,7 +8,7 @@ Server myServer;
 
 void setup() {
   size(0, 0);
-  myServer = new Server(this, 5204, "192.168.10.18");
+  myServer = new Server(this, 5204, "10.178.144.129");
   frameRate(100);
 }
 

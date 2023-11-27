@@ -7,7 +7,7 @@ String dataIn = "";
 
 void setup() {
   size(1000, 800);
-  myClient = new Client(this, "192.168.10.18", 5204);
+  myClient = new Client(this, "10.178.144.129", 5204);
   frameRate(100);
 }
 
